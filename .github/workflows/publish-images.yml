@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 3 * * 3" # At 03:00 on Wednesday # https://crontab.guru/#0_3_*_*_3
+  push:
+    branches:
+      - explore-3.3.0-preview2
 
 jobs:
   build:
@@ -38,6 +41,8 @@ jobs:
           ruby-version: "3.1"
           bundler-cache: true
       - id: rcd_config
+        env:
+          CONTAINER_REGISTRY: "ghcr.io/intrip/rake-compiler"
         run: |
           bundle exec ruby -e ' \
             require "rake_compiler_dock"; \
